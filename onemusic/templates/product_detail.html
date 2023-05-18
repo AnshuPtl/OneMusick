@@ -1,0 +1,91 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+
+<!DOCTYPE html>
+<html class="wide wow-animation" lang="en">
+  <head>
+    
+  </head>
+  <body>
+        <section class="breadcumb-area bg-img bg-overlay" style="background-image:  url({{product.product_image.url}});">
+            <div class="bradcumbContent">
+                <h2>{{product.product_name}}</h2>
+            </div>
+        </section>
+        
+      <section class="section section-lg bg-default login-area section-padding-100">
+        <div class="container">
+          <div class="row row-50">
+            <div class="col-md-6 text-center">
+              <div class="box-image-1"><img src="{{product.product_image.url}}" alt="" width="468" height="276"/>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="box-about">
+                <div class="box-about-title-wrap">
+                {% if msg %}
+                <h5 style="color:#ABCDEF">{{msg}}</h5>
+                {% else %}
+                <h5 style="color:red">{{msg1}}</h5>
+                {% endif %}
+                  <h2 class="box-about-mega-title">Price :  &#X20B9; {{product.product_price}}</h2>
+                </div>
+                <br>
+                <h5 class="box-about-post-title">Venue: <P>{{product.product_venue}}</P> </h5>
+
+                <h5 class="box-about-post-title">Date: {{product.product_date}}</h5>
+            
+                <h5 class="box-about-post-title">Time: {{product.product_time}}</h5>
+               
+                <h5 class="box-about-post-title">Hurry Up! Limited Tickets</h5>
+                <p>Quantity : {{product.product_qty}}</p>
+                <h4 class="box-about-post-title">Description: </h4>
+                <p>{{product.product_desc}}</p> 
+
+                
+
+                {% if request.session.email %}
+
+                {% if cart_flag %}
+                 <div class="row">
+                    <div class="col-12">
+                        <div class="load-more-btn text-center mt-30">
+                            <a href="{% url 'remove_from_cart' pk=product.pk %}" class="btn oneMusic-btn">Remove from Cart <i class="fa fa-angle-double-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="load-more-btn text-center mt-30">
+                            <a href="{% url 'add_to_cart' pk=product.pk %}" class="btn oneMusic-btn">Add to Cart <i class="fa fa-angle-double-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                {% endif %}
+
+                {% else %}
+                <div class="row">
+                    <div class="col-12">
+                        <div class="load-more-btn text-center mt-70">
+                            <a href="{% url 'login' %}" class="btn oneMusic-btn">Login<i class="fa fa-angle-double-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>  
+      
+  </body>
+</html>
+
+{% endblock %}

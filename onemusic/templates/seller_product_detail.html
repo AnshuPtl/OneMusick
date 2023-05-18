@@ -1,0 +1,82 @@
+{% extends 'seller_header.html'%}
+{%load static%}
+{%block content%}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+
+</head>
+
+<body>
+        <!-- ##### Breadcumb Area Start ##### -->
+    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url('{% static 'img/bg-img/breadcumb3.jpg'%}');">
+        <div class="bradcumbContent">
+            <p>See what’s new</p>
+            <h2>Event</h2>
+        </div>
+    </section>
+    {% if msg %}
+            <b style="color:#ABCDEF">{{msg}}</b>
+          {% else %}
+            <b style="color:red">{{msg1}}</b>
+          {% endif %}
+      <!--Mailform-->
+    <section class="event-area section-padding-100">
+        <div class="container">
+        {% if msg %}
+          <h3 style="color: green;" align="center">{{msg}}</h3>
+        {% else %}
+          <h3 style="color: red;" align="center">{{msg1}}</h3>
+        {% endif %}
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                  <div class="login-form">
+                    <form class="rd-form rd-mailform text-center" method="post" action="{% url 'seller_product_edit' pk=product.pk %}" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <div class="event-text">
+                        <img src="{{product.product_image.url}}" alt="Image" style="height: 250px; width: 500px;">
+                         
+                      </div>
+                      <div class="event-text">
+                          <h3 class="form-h3" for="contact-fname">Name: {{product.product_name}}</h3>
+                         
+                      </div>
+                      <div class="event-text">
+                          <h3 class="form-h3" for="contact-lname">Price: RS.{{product.product_price}}</h3>
+                         
+                      </div>
+                        <div class="event-text">
+                          <h3 class="form-h3">QTY: {{product.product_qty}}</h3>
+                                                </div>
+                      
+                      <div class="event-text">
+                        <h3 class="form-h3" for="contact-address">Venue: {{product.product_venue}}</h3>
+                        
+                      </div>
+                      <div class="event-text">
+                          <h3 class="form-h3" for="contact-fname">Time: {{product.product_time}}</h3>
+                          <h3 class="form-h3" for="contact-lname">Date: {{product.product_date}}</h3>
+                         
+                      </div>
+                           
+                      <div class="event-text">
+                          <h3>Description: <span><h6>{{product.product_desc}}</h6></span></h3>
+                          
+                      </div>                  
+                         
+         
+                  </form>
+                </div>
+              </div>
+            </div>
+        </div>
+      </section>
+      
+  </body>
+</html>
+
+{% endblock %}
